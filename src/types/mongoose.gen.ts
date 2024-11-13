@@ -8,16 +8,17 @@
 import mongoose from 'mongoose'
 
 /**
- * Lean version of ProductDocument
+ * Lean version of OrderDocument
  *
- * This has all Mongoose getters & functions removed. This type will be returned from `ProductDocument.toObject()`. To avoid conflicts with model names, use the type alias `ProductObject`.
+ * This has all Mongoose getters & functions removed. This type will be returned from `OrderDocument.toObject()`. To avoid conflicts with model names, use the type alias `OrderObject`.
  * ```
- * const productObject = product.toObject();
+ * const orderObject = order.toObject();
  * ```
  */
-export type Product = {
-  name: string
-  thumbnail?: string
+export type Order = {
+  reference: string
+  product?: Product['_id'] | Product
+  quantity: number
   price: number
   _id: mongoose.Types.ObjectId
   createdAt?: Date
@@ -25,73 +26,69 @@ export type Product = {
 }
 
 /**
- * Lean version of ProductDocument (type alias of `Product`)
+ * Lean version of OrderDocument (type alias of `Order`)
  *
  * Use this type alias to avoid conflicts with model names:
  * ```
- * import { Product } from "../models"
- * import { ProductObject } from "../interfaces/mongoose.gen.ts"
+ * import { Order } from "../models"
+ * import { OrderObject } from "../interfaces/mongoose.gen.ts"
  *
- * const productObject: ProductObject = product.toObject();
+ * const orderObject: OrderObject = order.toObject();
  * ```
  */
-export type ProductObject = Product
+export type OrderObject = Order
 
 /**
  * Mongoose Query type
  *
  * This type is returned from query functions. For most use cases, you should not need to use this type explicitly.
  */
-export type ProductQuery = mongoose.Query<any, ProductDocument, ProductQueries> & ProductQueries
+export type OrderQuery = mongoose.Query<any, OrderDocument, OrderQueries> & OrderQueries
 
 /**
  * Mongoose Query helper types
  *
- * This type represents `ProductSchema.query`. For most use cases, you should not need to use this type explicitly.
+ * This type represents `OrderSchema.query`. For most use cases, you should not need to use this type explicitly.
  */
-export type ProductQueries = {}
+export type OrderQueries = {}
 
-export type ProductMethods = {}
+export type OrderMethods = {}
 
-export type ProductStatics = {}
+export type OrderStatics = {}
 
 /**
  * Mongoose Model type
  *
  * Pass this type to the Mongoose Model constructor:
  * ```
- * const Product = mongoose.model<ProductDocument, ProductModel>("Product", ProductSchema);
+ * const Order = mongoose.model<OrderDocument, OrderModel>("Order", OrderSchema);
  * ```
  */
-export type ProductModel = mongoose.Model<ProductDocument, ProductQueries> & ProductStatics
+export type OrderModel = mongoose.Model<OrderDocument, OrderQueries> & OrderStatics
 
 /**
  * Mongoose Schema type
  *
- * Assign this type to new Product schema instances:
+ * Assign this type to new Order schema instances:
  * ```
- * const ProductSchema: ProductSchema = new mongoose.Schema({ ... })
+ * const OrderSchema: OrderSchema = new mongoose.Schema({ ... })
  * ```
  */
-export type ProductSchema = mongoose.Schema<
-  ProductDocument,
-  ProductModel,
-  ProductMethods,
-  ProductQueries
->
+export type OrderSchema = mongoose.Schema<OrderDocument, OrderModel, OrderMethods, OrderQueries>
 
 /**
  * Mongoose Document type
  *
  * Pass this type to the Mongoose Model constructor:
  * ```
- * const Product = mongoose.model<ProductDocument, ProductModel>("Product", ProductSchema);
+ * const Order = mongoose.model<OrderDocument, OrderModel>("Order", OrderSchema);
  * ```
  */
-export type ProductDocument = mongoose.Document<mongoose.Types.ObjectId, ProductQueries> &
-  ProductMethods & {
-    name: string
-    thumbnail?: string
+export type OrderDocument = mongoose.Document<mongoose.Types.ObjectId, OrderQueries> &
+  OrderMethods & {
+    reference: string
+    product?: ProductDocument['_id'] | ProductDocument
+    quantity: number
     price: number
     _id: mongoose.Types.ObjectId
     createdAt?: Date
