@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-const ContactSchema: Schema = new Schema(
+const UserSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
     avatar: { type: String },
@@ -9,6 +9,6 @@ const ContactSchema: Schema = new Schema(
   { timestamps: true }
 )
 
-const ContactModel = model('Contact', ContactSchema)
+const UserModel = model('User', UserSchema)
 
-export { ContactModel }
+export { UserModel }
