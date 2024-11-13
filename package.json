@@ -1,0 +1,29 @@
+{
+  "name": "zaratica",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "mtgen": "mtgen --output ./src/types ./src/models/**/*.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "mongoose": "^8.0.3",
+    "mongoose-tsgen": "^9.4.4"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "endOfLine": "auto",
+    "bracketSameLine": true
+  }
+}
